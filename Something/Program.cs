@@ -2,9 +2,94 @@
 {
     internal class Program
     {
+        public const string Equal = "equal";
+        public const string Rectangular = "rectangular";
+        public const string Circular = "circular";
+
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            // var book1 = new Book();
+            // book1.Author = "New Writer";
+            // book1.Title = "First Book";
+            // book1.Publisher = "Publisher 1";
+
+            // var book2 = new Book();
+            // book2.Author = "New Writer";
+            // book2.Title = "Second Book";
+            // book2.Publisher = "Publisher 2";
+            // book2.Description = "Interesting read";
+
+            // Console.WriteLine(BookDetails(book1));
+            // Console.WriteLine(BookDetails(book2));
+            string compare1 = Solve(new Rectangle[0], new Circle[0]);
+            string compare2 = Solve(new[] { new Rectangle(1, 5) }, new Circle[0]);
+            string compare3 = Solve(new Rectangle[0], new[] { new Circle(1) });
+            string compare4 = Solve(
+                new[] { new Rectangle(5.0, 2.1), new Rectangle(3, 3) },
+                new[] { new Circle(1), new Circle(10) }
+            );
+            Console.WriteLine($"compare1 is {compare1}");
+            Console.WriteLine($"compare2 is {compare2}");
+            Console.WriteLine($"compare3 is {compare3}");
+            Console.WriteLine($"compare4 is {compare4}");
+            Console.WriteLine("Press any key to exit program.");
+            Console.ReadKey();
+        }
+
+        private static string BookDetails(Book book)
+        {
+            var author = $"Author: {book.Author}\n";
+            var title = $"Title: {book.Title}\n";
+            var publisher = $"Publisher: {book.Publisher}\n";
+            var description = $"Description: {book.Description}\n";
+            return author + title + publisher + description;
+        }
+
+        public static string Solve(Rectangle[] rectangularSection, Circle[] circularSection)
+        {
+            var totalAreaOfRectangles = CalculateTotalAreaOfRectangles(rectangularSection);
+            var totalAreaOfCircles = CalculateTotalAreaOfCircles(circularSection);
+            return GetBigger(totalAreaOfRectangles, totalAreaOfCircles);
+        }
+
+        private static string GetBigger(double totalAreaOfRectangles, double totalAreaOfCircles)
+        {
+            const double margin = 0.01;
+            bool areAlmostEqual = Math.Abs(totalAreaOfRectangles - totalAreaOfCircles) <= margin;
+            if (areAlmostEqual)
+            {
+                return Equal;
+            }
+            else if (totalAreaOfRectangles > totalAreaOfCircles)
+            {
+                return Rectangular;
+            }
+            else
+            {
+                return Circular;
+            }
+        }
+
+        private static double CalculateTotalAreaOfCircles(Circle[] circularSection)
+        {
+            double total = 0;
+            foreach (var c in circularSection)
+            {
+                total += c.Area;
+            }
+
+            return total;
+        }
+
+        private static double CalculateTotalAreaOfRectangles(Rectangle[] rectangularSection)
+        {
+            double total = 0;
+            foreach (var r in rectangularSection)
+            {
+                total += r.Area;
+            }
+
+            return total;
         }
     }
 }
