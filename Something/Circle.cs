@@ -2,7 +2,7 @@ using System;
 
 namespace Something;
 
-public class Circle
+public class Circle : IShape
 {
     private readonly double _radius;
 

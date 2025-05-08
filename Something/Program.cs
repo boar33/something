@@ -21,17 +21,28 @@
 
             // Console.WriteLine(BookDetails(book1));
             // Console.WriteLine(BookDetails(book2));
-            string compare1 = Solve(new Rectangle[0], new Circle[0]);
-            string compare2 = Solve(new[] { new Rectangle(1, 5) }, new Circle[0]);
-            string compare3 = Solve(new Rectangle[0], new[] { new Circle(1) });
-            string compare4 = Solve(
-                new[] { new Rectangle(5.0, 2.1), new Rectangle(3, 3) },
-                new[] { new Circle(1), new Circle(10) }
+            // string compare1 = Solve([], []);
+            // string compare2 = Solve([new Rectangle(1, 5)], []);
+            // string compare3 = Solve([], [new Circle(1)]);
+            // string compare4 = Solve(
+            //     [new Rectangle(5.0, 2.1), new Rectangle(3, 3)],
+            //     [new Circle(1), new Circle(10)]
+            // );
+            // Console.WriteLine($"compare1 is {compare1}");
+            // Console.WriteLine($"compare2 is {compare2}");
+            // Console.WriteLine($"compare3 is {compare3}");
+            // Console.WriteLine($"compare4 is {compare4}");
+            var isEnough1 = IsEnough(0, []);
+            var isEnough2 = IsEnough(1, [new Rectangle(1, 1)]);
+            var isEnough3 = IsEnough(100, [new Circle(5)]);
+            var isEnough4 = IsEnough(
+                5,
+                [new Rectangle(1, 1), new Circle(1), new Rectangle(1.4, 1)]
             );
-            Console.WriteLine($"compare1 is {compare1}");
-            Console.WriteLine($"compare2 is {compare2}");
-            Console.WriteLine($"compare3 is {compare3}");
-            Console.WriteLine($"compare4 is {compare4}");
+            Console.WriteLine($"Is Enough1: {isEnough1}");
+            Console.WriteLine($"Is Enough2: {isEnough2}");
+            Console.WriteLine($"Is Enough3: {isEnough3}");
+            Console.WriteLine($"Is Enough4: {isEnough4}");
             Console.WriteLine("Press any key to exit program.");
             Console.ReadKey();
         }
@@ -90,6 +101,17 @@
             }
 
             return total;
+        }
+
+        private static bool IsEnough(double mosaicArea, IShape[] tiles)
+        {
+            double total = 0;
+            foreach (var t in tiles)
+            {
+                total += t.Area;
+            }
+            const double tolerance = 0.0001;
+            return total - mosaicArea >= -tolerance;
         }
     }
 }

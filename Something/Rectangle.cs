@@ -2,7 +2,7 @@ using System;
 
 namespace Something;
 
-public class Rectangle
+public class Rectangle : IShape
 {
     private readonly double _width;
     private readonly double _height;
