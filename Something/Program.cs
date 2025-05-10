@@ -32,17 +32,26 @@
             // Console.WriteLine($"compare2 is {compare2}");
             // Console.WriteLine($"compare3 is {compare3}");
             // Console.WriteLine($"compare4 is {compare4}");
-            var isEnough1 = IsEnough(0, []);
-            var isEnough2 = IsEnough(1, [new Rectangle(1, 1)]);
-            var isEnough3 = IsEnough(100, [new Circle(5)]);
-            var isEnough4 = IsEnough(
-                5,
-                [new Rectangle(1, 1), new Circle(1), new Rectangle(1.4, 1)]
-            );
-            Console.WriteLine($"Is Enough1: {isEnough1}");
-            Console.WriteLine($"Is Enough2: {isEnough2}");
-            Console.WriteLine($"Is Enough3: {isEnough3}");
-            Console.WriteLine($"Is Enough4: {isEnough4}");
+            // var isEnough1 = IsEnough(0, []);
+            // var isEnough2 = IsEnough(1, [new Rectangle(1, 1)]);
+            // var isEnough3 = IsEnough(100, [new Circle(5)]);
+            // var isEnough4 = IsEnough(
+            //     5,
+            //     [new Rectangle(1, 1), new Circle(1), new Rectangle(1.4, 1)]
+            // );
+            // Console.WriteLine($"Is Enough1: {isEnough1}");
+            // Console.WriteLine($"Is Enough2: {isEnough2}");
+            // Console.WriteLine($"Is Enough3: {isEnough3}");
+            // Console.WriteLine($"Is Enough4: {isEnough4}");
+
+            var bankAccount = new BankAccount(10_000);
+            var user = new User(1000, bankAccount.Balance);
+            bankAccount.OnBalanceDecreased += user.ReduceFunds;
+            bankAccount.DecreaseBalance(100);
+
+            Console.WriteLine($"Balance: {bankAccount.Balance}");
+            Console.WriteLine($"User funds {user.Funds}");
+
             Console.WriteLine("Press any key to exit program.");
             Console.ReadKey();
         }
